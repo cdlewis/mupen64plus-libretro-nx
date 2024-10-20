@@ -613,6 +613,7 @@ ifeq ($(STATIC_LINKING), 1)
 endif
 
 include Makefile.common
+include libRetroReversing/Makefile.retroreversing
 
 ifeq ($(HAVE_NEON), 1)
    COREFLAGS += -DHAVE_NEON -D__ARM_NEON__ -D__NEON_OPT -ftree-vectorize -funsafe-math-optimizations -fno-finite-math-only -DUSE_SSE2NEON
@@ -642,8 +643,8 @@ endif
 CPUOPTS += -fcommon
 
 # set C/C++ standard to use
-CFLAGS += -std=gnu11 -D_CRT_SECURE_NO_WARNINGS -Wno-discarded-qualifiers
-CXXFLAGS += -std=gnu++11 -D_CRT_SECURE_NO_WARNINGS
+CFLAGS += -std=gnu17 -D_CRT_SECURE_NO_WARNINGS -Wno-discarded-qualifiers
+CXXFLAGS += -std=gnu++17 -D_CRT_SECURE_NO_WARNINGS
 
 ifeq ($(HAVE_LTCG),1)
    CPUFLAGS += -flto
