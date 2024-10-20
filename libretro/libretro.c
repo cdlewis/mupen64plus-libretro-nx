@@ -29,6 +29,7 @@
 
 #include "GLideN64_libretro.h"
 #include "mupen64plus-next_common.h"
+#include "../libRetroReversing/include/libRR_c.h"
 
 #include <libco.h>
 
@@ -529,7 +530,9 @@ void retro_set_video_refresh(retro_video_refresh_t cb) { video_cb = cb; }
 void retro_set_audio_sample(retro_audio_sample_t cb)   { }
 void retro_set_audio_sample_batch(retro_audio_sample_batch_t cb) { audio_batch_cb = cb; }
 void retro_set_input_poll(retro_input_poll_t cb) { poll_cb = cb; }
-void retro_set_input_state(retro_input_state_t cb) { input_cb = cb; }
+void retro_set_input_state(retro_input_state_t cb) {
+   input_cb = libRR_handle_input(cb);
+}
 
 bool retro_load_game_special(unsigned game_type, const struct retro_game_info *info, size_t num_info)
 {
@@ -1852,6 +1855,8 @@ bool retro_load_game(const struct retro_game_info *game)
 {
     char* gamePath;
     char* newPath;
+
+   libRR_handle_load_game(game, environ_cb);
 
     // Workaround for broken subsystem on static platforms
     // Note: game->path can be NULL if loading from a archive

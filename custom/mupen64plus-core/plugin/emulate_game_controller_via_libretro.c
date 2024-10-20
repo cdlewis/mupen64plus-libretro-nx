@@ -29,6 +29,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include "../../libRetroReversing/include/libRR_c.h"
 
 #define ROUND(x)    floor((x) + 0.5)
 
@@ -135,6 +136,7 @@ static void inputGetKeys_default_descriptor(void)
          { 0 },
       };
       environ_cb(RETRO_ENVIRONMENT_SET_INPUT_DESCRIPTORS, desc);
+      libRR_setInputDescriptor(desc, 21);
    }
 }
 
