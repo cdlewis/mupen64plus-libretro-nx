@@ -179,11 +179,14 @@ audio_batch:
 }
 
 /* Abuse core & audio plugin implementation details to obtain the desired effect. */
+void cdl_log_audio_sample(uint32_t saved_ai_dram, uint32_t saved_ai_length);
 void push_audio_samples_via_libretro(void* user_data, const void* buffer, size_t size)
 {
    struct ai_controller* ai = (struct ai_controller*)user_data;
    uint32_t saved_ai_length = ai->regs[AI_LEN_REG];
    uint32_t saved_ai_dram = ai->regs[AI_DRAM_ADDR_REG];
+
+   cdl_log_audio_sample(ai->regs[AI_DRAM_ADDR_REG], ai->regs[AI_LEN_REG]);
 
    /* notify plugin of new samples to play.
     * Exploit the fact that buffer points in ai->ri->rdram.dram to retrieve dram_addr_reg value */

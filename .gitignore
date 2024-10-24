@@ -9,8 +9,7 @@
 *.bc
 asm_defines_nasm.h
 asm_defines_gas.h
-.vscode/ipch/*
-.vscode/c_cpp_properties.json
+.vscode
 linker.list
 configs
 libultra.json
