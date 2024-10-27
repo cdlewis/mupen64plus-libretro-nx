@@ -86,6 +86,7 @@ static void dma_pi_read(struct pi_controller* pi)
     add_interrupt_event(&pi->mi->r4300->cp0, PI_INT, cycles);
 }
 
+void log_dma_write(uint8_t* mem, uint32_t proper_cart_address, uint32_t cart_addr, uint32_t length, uint32_t dram_addr);
 static void dma_pi_write(struct pi_controller* pi)
 {
     if (!validate_pi_request(pi))
@@ -100,6 +101,13 @@ static void dma_pi_write(struct pi_controller* pi)
     void* opaque = NULL;
 
     pi->get_pi_dma_handler(pi->cart, pi->dd, cart_addr, &opaque, &handler);
+
+    uint32_t proper_cart_address = cart_addr-0x10000000;
+    struct cart_rom* cart_rom = (struct cart_rom*)opaque;
+    const uint8_t* mem = cart_rom->rom;
+    if (cart_rom->rom_size > 0) {
+        log_dma_write(cart_rom->rom, proper_cart_address, cart_addr, length, pi->regs[PI_DRAM_ADDR_REG]);
+    }
 
     if (handler == NULL) {
         DebugMessage(M64MSG_WARNING, "Unknown PI DMA write: 0x%" PRIX32 " -> 0x%" PRIX32 " (0x%" PRIX32 ")", cart_addr, dram_addr, length);

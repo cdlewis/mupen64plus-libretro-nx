@@ -69,6 +69,8 @@ typedef struct {
     void (*ProcessAlistList)(void);
     void (*ProcessRdpList)(void);
     void (*ShowCFB)(void);
+    
+    void (*cdl_log_ostask)(uint32_t type, uint32_t flags, uint32_t bootcode, uint32_t bootSize, uint32_t ucode, uint32_t ucodeSize, uint32_t ucodeData, uint32_t ucodeDataSize);
 } RSP_INFO;
 
 typedef struct {

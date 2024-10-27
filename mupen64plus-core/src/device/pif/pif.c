@@ -283,8 +283,11 @@ void poweron_pif(struct pif* pif)
     reset_pif(pif, 0); /* cold reset */
 }
 
+void cdl_log_pif_ram(uint32_t address, uint32_t* value);
 void read_pif_mem(void* opaque, uint32_t address, uint32_t* value)
 {
+    cdl_log_pif_ram(address, value);
+
     struct pif* pif = (struct pif*)opaque;
     uint32_t addr = pif_address(address);
 

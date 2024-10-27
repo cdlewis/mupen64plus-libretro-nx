@@ -323,6 +323,7 @@ static m64p_error plugin_start_input(void)
     return M64ERR_SUCCESS;
 }
 
+void cdl_log_ostask(uint32_t type, uint32_t flags, uint32_t bootcode, uint32_t bootSize, uint32_t ucode, uint32_t ucodeSize, uint32_t ucodeData, uint32_t ucodeDataSize);
 static m64p_error plugin_start_rsp(void)
 {
     /* fill in the RSP_INFO data structure */
@@ -352,6 +353,7 @@ static m64p_error plugin_start_rsp(void)
     rsp_info.ProcessAlistList = audio.processAList;
     rsp_info.ProcessRdpList = gfx.processRDPList;
     rsp_info.ShowCFB = gfx.showCFB;
+    rsp_info.cdl_log_ostask = cdl_log_ostask;
 
     /* call the RSP plugin  */
     rsp.initiateRSP(rsp_info, NULL);

@@ -24,6 +24,7 @@
 
 #include <stddef.h>
 #include <stdint.h>
+#include "../../../../libRetroReversing/include/libRR_c.h"
 
 #include "idec.h"
 

@@ -22,6 +22,8 @@
 #ifndef M64P_DEVICE_R4300_PURE_INTERP_H
 #define M64P_DEVICE_R4300_PURE_INTERP_H
 
+#include "../../../../libRetroReversing/include/libRR_c.h"
+
 struct r4300_core;
 
 void run_pure_interpreter(struct r4300_core* r4300);
